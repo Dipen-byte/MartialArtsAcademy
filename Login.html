@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Martial Arts Academy</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-crimson: #C41E3A;
+            --primary-gold: #FFD700;
+            --dark-bg: #1a1a1a;
+            --light-gray: #f5f5f5;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Main Container */
+        .auth-wrapper {
+            display: flex;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        /* Left Side - Forms */
+        .form-side {
+            flex: 1;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem 4rem;
+            position: relative;
+            z-index: 2;
+            transition: all 0.6s ease-in-out;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 3rem;
+        }
+        
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: var(--primary-crimson);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .logo-text {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark-bg);
+        }
+        
+        .form-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-width: 400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .form-title {
+            font-size: 2.5rem;
+            color: var(--dark-bg);
+            margin-bottom: 0.5rem;
+            text-transform: none;
+        }
+        
+        .social-text {
+            color: #666;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        
+        /* Social Buttons */
+        .social-login {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+            color: white;
+        }
+        
+        .social-btn.facebook {
+            background: #3b5998;
+        }
+        
+        .social-btn.google {
+            background: #db4437;
+        }
+        
+        .social-btn.linkedin {
+            background: #0077b5;
+        }
+        
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        /* Divider */
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 1.5rem 0;
+            color: #999;
+            font-size: 0.9rem;
+        }
+        
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e0e0e0;
+        }
+        
+        .divider span {
+            padding: 0 1rem;
+        }
+        
+        /* Form Inputs */
+        .form-group {
+            margin-bottom: 1.25rem;
+            position: relative;
+        }
+        
+        .form-control {
+            width: 100%;
+            height: 55px;
+            border: 2px solid #e8e8e8;
+            border-radius: 12px;
+            padding: 0 1.25rem;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-crimson);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(196, 30, 58, 0.1);
+            outline: none;
+        }
+        
+        .password-toggle {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .password-toggle:hover {
+            color: var(--primary-crimson);
+        }
+        
+        /* Submit Button */
+        .btn-submit {
+            width: 100%;
+            height: 55px;
+            background: var(--primary-crimson);
+            border: none;
+            border-radius: 30px;
+            color: white;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-submit:hover {
+            background: #a01830;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(196, 30, 58, 0.3);
+        }
+        
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+        
+        .btn-submit.loading {
+            color: transparent;
+        }
+        
+        .btn-submit.loading::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: 50%;
+            left: 50%;
+            margin-left: -10px;
+            margin-top: -10px;
+            border: 2px solid #ffffff;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spinner 0.8s linear infinite;
+        }
+        
+        @keyframes spinner {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Right Side - Overlay Panel */
+        .overlay-side {
+            flex: 1;
+            background: linear-gradient(135deg, var(--primary-crimson) 0%, #8b1538 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .overlay-side::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1555597673-b21d5c935865?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+            opacity: 0.15;
+        }
+        
+        .overlay-content {
+            text-align: center;
+            color: white;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+            max-width: 400px;
+        }
+        
+        .overlay-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .overlay-text {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+        
+        .btn-switch {
+            background: white;
+            color: var(--primary-crimson);
+            border: none;
+            padding: 1rem 3rem;
+            border-radius: 30px;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+        
+        .btn-switch:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            background: var(--primary-gold);
+            color: var(--dark-bg);
+        }
+        
+        /* Close Button */
+        .close-btn {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            background: transparent;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        
+        .close-btn:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: white;
+            transform: rotate(90deg);
+        }
+        
+        /* Form Sections */
+        .form-section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .form-section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        /* Alert Messages */
+        .alert {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            color: white;
+            font-weight: 600;
+            z-index: 1000;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+        
+        .alert.show {
+            transform: translateX(0);
+        }
+        
+        .alert.success {
+            background: #28a745;
+        }
+        
+        .alert.error {
+            background: #dc3545;
+        }
+        
+        /* Additional Fields for Sign Up */
+        .name-fields {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        /* Remember & Forgot */
+        .form-extras {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #666;
+            cursor: pointer;
+        }
+        
+        .remember-me input {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary-crimson);
+        }
+        
+        .forgot-link {
+            color: var(--primary-crimson);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .forgot-link:hover {
+            color: #a01830;
+            text-decoration: underline;
+        }
+        
+        /* Terms */
+        .terms {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            color: #666;
+        }
+        
+        .terms input {
+            width: 18px;
+            height: 18px;
+            margin-top: 2px;
+            accent-color: var(--primary-crimson);
+        }
+        
+        .terms a {
+            color: var(--primary-crimson);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .auth-wrapper {
+                flex-direction: column;
+            }
+            
+            .form-side {
+                padding: 2rem;
+                order: 2;
+            }
+            
+            .overlay-side {
+                order: 1;
+                min-height: 200px;
+                padding: 2rem;
+            }
+            
+            .overlay-title {
+                font-size: 2rem;
+            }
+            
+            .form-title {
+                font-size: 2rem;
+            }
+            
+            .name-fields {
+                grid-template-columns: 1fr;
+            }
+            
+            .close-btn {
+                top: 1rem;
+                right: 1rem;
+                background: rgba(0,0,0,0.3);
+            }
+        }
+        
+        /* Decorative Elements */
+        .decoration-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .decoration-circle:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: -150px;
+            right: -150px;
+            animation-delay: 0s;
+        }
+        
+        .decoration-circle:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            bottom: -100px;
+            left: -100px;
+            animation-delay: 2s;
+        }
+        
+        .decoration-circle:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            top: 50%;
+            right: 10%;
+            animation-delay: 4s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-20px) scale(1.05); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Alert Container -->
+    <div id="alertBox" class="alert"></div>
+    
+    <div class="auth-wrapper">
+        <!-- Left Side - Forms -->
+        <div class="form-side">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="360_F_287669297_jyKF7nGOczOnkSvXNxFzikGl2ppPCGPm.jpg"></i>
+                </div>
+                <span class="logo-text">Martial <span style="color: var(--primary-crimson);">Arts <span class="logo-text">Academy</span></span></span>
+            </div>
+            
+            <div class="form-container">
+                <!-- Sign In Form -->
+                <div id="signinSection" class="form-section active">
+                    <h1 class="form-title">Login to Your Account</h1>
+                    <p class="social-text">Login using social networks</p>
+                    
+                    <div class="social-login">
+                        <button class="social-btn facebook" onclick="socialLogin('Facebook')" title="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </button>
+                        <button class="social-btn google" onclick="socialLogin('Google')" title="Google">
+                            <i class="fab fa-google-plus-g"></i>
+                        </button>
+                        <button class="social-btn linkedin" onclick="socialLogin('LinkedIn')" title="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="divider"><span>OR</span></div>
+                    
+                    <form id="signinForm" onsubmit="handleSignin(event)">
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="signinEmail" placeholder="Email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="signinPassword" placeholder="Password" required>
+                            <i class="fas fa-eye password-toggle" onclick="togglePassword('signinPassword', this)"></i>
+                        </div>
+                        
+                        <div class="form-extras">
+                            <label class="remember-me">
+                                <input type="checkbox" checked>
+                                <span>Remember me</span>
+                            </label>
+                            <a href="#" class="forgot-link">Forgot Password?</a>
+                        </div>
+                        
+                        <button type="submit" class="btn-submit" id="signinBtn">
+                            Sign In
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Sign Up Form -->
+                <div id="signupSection" class="form-section">
+                    <h1 class="form-title">Create Account</h1>
+                    <p class="social-text">Sign up using social networks</p>
+                    
+                    <div class="social-login">
+                        <button class="social-btn facebook" onclick="socialLogin('Facebook')" title="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </button>
+                        <button class="social-btn google" onclick="socialLogin('Google')" title="Google">
+                            <i class="fab fa-google-plus-g"></i>
+                        </button>
+                        <button class="social-btn linkedin" onclick="socialLogin('LinkedIn')" title="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="divider"><span>OR</span></div>
+                    
+                    <form id="signupForm" onsubmit="handleSignup(event)">
+                        <div class="name-fields">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="firstName" placeholder="First Name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="lastName" placeholder="Last Name" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="signupEmail" placeholder="Email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="signupPassword" placeholder="Password" required minlength="8">
+                            <i class="fas fa-eye password-toggle" onclick="togglePassword('signupPassword', this)"></i>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password" required>
+                        </div>
+                        
+                        <div class="terms">
+                            <input type="checkbox" id="agreeTerms" required>
+                            <span>I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></span>
+                        </div>
+                        
+                        <button type="submit" class="btn-submit" id="signupBtn">
+                            Sign Up
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Right Side - Overlay -->
+        <div class="overlay-side">
+            <div class="decoration-circle"></div>
+            <div class="decoration-circle"></div>
+            <div class="decoration-circle"></div>
+            
+            <button class="close-btn" onclick="goHome()" title="Close">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="overlay-content">
+                <div id="overlaySignin">
+                    <h2 class="overlay-title">New Here?</h2>
+                    <p class="overlay-text">Sign up and discover a great amount of new opportunities in martial arts training!</p>
+                    <button class="btn-switch" onclick="switchMode('signup')">Sign Up</button>
+                </div>
+                
+                <div id="overlaySignup" style="display: none;">
+                    <h2 class="overlay-title">Welcome Back!</h2>
+                    <p class="overlay-text">Already have an account? Sign in to continue your martial arts journey!</p>
+                    <button class="btn-switch" onclick="switchMode('signin')">Sign In</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // User Database (Simulated - In production, use proper backend)
+        let users = JSON.parse(localStorage.getItem('martialArtsUsers')) || [];
+        let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
+        
+        // Check if already logged in
+        if (currentUser) {
+            showAlert(`Welcome back, ${currentUser.name}! Redirecting...`, 'success');
+            setTimeout(() => {
+                // window.location.href = 'dashboard.html';
+            }, 2000);
+        }
+        
+        // Switch between Sign In and Sign Up
+        function switchMode(mode) {
+            const signinSection = document.getElementById('signinSection');
+            const signupSection = document.getElementById('signupSection');
+            const overlaySignin = document.getElementById('overlaySignin');
+            const overlaySignup = document.getElementById('overlaySignup');
+            
+            if (mode === 'signup') {
+                signinSection.classList.remove('active');
+                setTimeout(() => {
+                    signupSection.classList.add('active');
+                }, 100);
+                overlaySignin.style.display = 'none';
+                overlaySignup.style.display = 'block';
+                overlaySignup.style.animation = 'fadeIn 0.5s ease';
+            } else {
+                signupSection.classList.remove('active');
+                setTimeout(() => {
+                    signinSection.classList.add('active');
+                }, 100);
+                overlaySignup.style.display = 'none';
+                overlaySignin.style.display = 'block';
+                overlaySignin.style.animation = 'fadeIn 0.5s ease';
+            }
+        }
+        
+        // Toggle Password Visibility
+        function togglePassword(inputId, icon) {
+            const input = document.getElementById(inputId);
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+        
+        // Handle Sign In
+        function handleSignin(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('signinEmail').value;
+            const password = document.getElementById('signinPassword').value;
+            const btn = document.getElementById('signinBtn');
+            
+            // Loading state
+            btn.classList.add('loading');
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                // Check credentials
+                const user = users.find(u => u.email === email && u.password === password);
+                
+                if (user) {
+                    // Store current user
+                    currentUser = {
+                        name: user.name,
+                        email: user.email,
+                        loginTime: new Date().toISOString()
+                    };
+                    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                    
+                    showAlert(`Welcome back, ${user.name}! Login successful.`, 'success');
+                    
+                    setTimeout(() => {
+                        // Redirect to home or dashboard
+                        window.location.href = 'hii.html';
+                    }, 1500);
+                } else {
+                    showAlert('Invalid email or password!', 'error');
+                    btn.classList.remove('loading');
+                    btn.disabled = false;
+                }
+            }, 1000);
+        }
+        
+        // Handle Sign Up
+        function handleSignup(e) {
+            e.preventDefault();
+            
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const btn = document.getElementById('signupBtn');
+            
+            // Validation
+            if (password !== confirmPassword) {
+                showAlert('Passwords do not match!', 'error');
+                return;
+            }
+            
+            if (password.length < 8) {
+                showAlert('Password must be at least 8 characters!', 'error');
+                return;
+            }
+            
+            // Check if email exists
+            if (users.find(u => u.email === email)) {
+                showAlert('Email already registered!', 'error');
+                return;
+            }
+            
+            // Loading state
+            btn.classList.add('loading');
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                // Create new user
+                const newUser = {
+                    id: Date.now(),
+                    name: `${firstName} ${lastName}`,
+                    email: email,
+                    password: password,
+                    createdAt: new Date().toISOString()
+                };
+                
+                users.push(newUser);
+                localStorage.setItem('martialArtsUsers', JSON.stringify(users));
+                
+                // Auto login
+                currentUser = {
+                    name: newUser.name,
+                    email: newUser.email,
+                    loginTime: new Date().toISOString()
+                };
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                
+                showAlert('Account created successfully! Welcome to Martial Arts Academy!', 'success');
+                
+                setTimeout(() => {
+                    window.location.href = 'hii.html';
+                }, 2000);
+            }, 1500);
+        }
+        
+        // Social Login
+        function socialLogin(provider) {
+            showAlert(`Connecting to ${provider}...`, 'success');
+            
+            setTimeout(() => {
+                // Simulate social login success
+                const socialUser = {
+                    name: `${provider} User`,
+                    email: `user@${provider.toLowerCase()}.com`,
+                    loginTime: new Date().toISOString()
+                };
+                localStorage.setItem('currentUser', JSON.stringify(socialUser));
+                showAlert(`${provider} login successful!`, 'success');
+                
+                setTimeout(() => {
+                    window.location.href = 'hii.html';
+                }, 1500);
+            }, 1500);
+        }
+        
+        // Show Alert
+        function showAlert(message, type) {
+            const alertBox = document.getElementById('alertBox');
+            alertBox.textContent = message;
+            alertBox.className = `alert ${type}`;
+            
+            setTimeout(() => alertBox.classList.add('show'), 10);
+            
+            setTimeout(() => {
+                alertBox.classList.remove('show');
+            }, 5000);
+        }
+        
+        // Go Home
+        function goHome() {
+            window.location.href = 'hii.html';
+        }
+        
+        // Input focus effects
+        document.querySelectorAll('.form-control').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'scale(1.02)';
+                this.parentElement.style.transition = 'transform 0.3s ease';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
