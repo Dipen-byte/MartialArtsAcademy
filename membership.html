@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Join Martial Arts Academy. Flexible membership options including monthly plans, class packs, and specialist courses.">
+    <title>Membership | Martial Arts Academy</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-crimson: #C41E3A;
+            --primary-gold: #FFD700;
+            --dark-bg: #1a1a1a;
+            --light-gray: #f5f5f5;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            padding-top: 76px;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .navbar {
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        
+        .navbar-brand {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fff !important;
+        }
+        
+        .navbar-brand span {
+            color: var(--primary-crimson);
+        }
+        
+        .nav-link {
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            color: #fff !important;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-gold) !important;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-crimson);
+            border-color: var(--primary-crimson);
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .btn-primary:hover {
+            background-color: #a01830;
+            border-color: #a01830;
+        }
+        
+        .btn-outline-primary {
+            color: var(--primary-crimson);
+            border-color: var(--primary-crimson);
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--primary-crimson);
+            border-color: var(--primary-crimson);
+        }
+        
+        .page-header {
+            background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(196,30,58,0.6) 100%),
+                        url('https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 6rem 0;
+            color: white;
+            text-align: center;
+        }
+        
+        .section-padding {
+            padding: 5rem 0;
+        }
+        
+        .pricing-card {
+            background: white;
+            border-radius: 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            padding: 2.5rem;
+            text-align: center;
+            height: 100%;
+            position: relative;
+            transition: transform 0.3s ease;
+            border-top: 4px solid transparent;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .pricing-card.featured {
+            border-top-color: var(--primary-crimson);
+            transform: scale(1.05);
+        }
+        
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-5px);
+        }
+        
+        .pricing-header {
+            margin-bottom: 1.5rem;
+        }
+        
+        .pricing-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .pricing-price {
+            font-size: 3rem;
+            color: var(--primary-crimson);
+            font-weight: 700;
+            font-family: 'Oswald', sans-serif;
+        }
+        
+        .pricing-period {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .pricing-features {
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0;
+            text-align: left;
+        }
+        
+        .pricing-features li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .pricing-features li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--primary-crimson);
+            margin-right: 0.75rem;
+        }
+        
+        .pricing-features li.not-included {
+            color: #999;
+            text-decoration: line-through;
+        }
+        
+        .pricing-features li.not-included::before {
+            content: '\f00d';
+            color: #999;
+        }
+        
+        .featured-badge {
+            position: absolute;
+            top: 0;
+            right: 2rem;
+            background: var(--primary-crimson);
+            color: white;
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            transform: translateY(-50%);
+        }
+        
+        .specialist-pricing {
+            background: var(--light-gray);
+        }
+        
+        .specialist-card {
+            background: white;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 1.5rem;
+        }
+        
+        .specialist-price {
+            font-size: 2rem;
+            color: var(--primary-crimson);
+            font-weight: 700;
+            font-family: 'Oswald', sans-serif;
+        }
+        
+        .contact-section {
+            background: var(--dark-bg);
+            color: white;
+        }
+        
+        footer {
+            background: var(--dark-bg);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+        
+        footer h5 {
+            color: var(--primary-gold);
+            margin-bottom: 1.5rem;
+        }
+        
+        footer a {
+            color: #aaa;
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            color: var(--primary-gold);
+        }
+        
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            margin-right: 0.5rem;
+            color: white;
+        }
+        
+        .social-links a:hover {
+            background: var(--primary-crimson);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="hii.html">Martial<span>Arts</span> Academy</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="hii.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="instructors.html">Instructors</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="membership.html">Membership</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                    <li class="nav-item ms-lg-3"><a class="btn btn-primary" href="Login.html">Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="display-4 fw-bold">Membership</h1>
+            <p class="lead">Flexible Plans for Every Goal</p>
+        </div>
+    </section>
+
+    <!-- Main Pricing -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="row justify-content-center">
+                <!-- Basic Plan -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3 class="pricing-title">Basic</h3>
+                            <div class="pricing-price">AED 75</div>
+                            <div class="pricing-period">per month</div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li>2 classes per week</li>
+                            <li>Access to gym facilities</li>
+                            <li>Locker room access</li>
+                            <li>Free uniform (gi)</li>
+                            <li>Basic fitness assessment</li>
+                            <li class="not-included">Private lessons</li>
+                            <li class="not-included">Competition training</li>
+                            <li class="not-included">Spa access</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-outline-primary w-100">Get Started</a>
+                    </div>
+                </div>
+                
+                <!-- Unlimited Plan (Featured) -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="pricing-card featured">
+                        <div class="featured-badge">Most Popular</div>
+                        <div class="pricing-header">
+                            <h3 class="pricing-title">Unlimited</h3>
+                            <div class="pricing-price">AED 125</div>
+                            <div class="pricing-period">per month</div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li>Unlimited classes</li>
+                            <li>All gym facilities</li>
+                            <li>Locker room & showers</li>
+                            <li>Free uniform (gi)</li>
+                            <li>Comprehensive fitness assessment</li>
+                            <li>1 private lesson/month</li>
+                            <li>Competition team access</li>
+                            <li>Sauna & ice bath access</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-primary w-100">Get Started</a>
+                    </div>
+                </div>
+                
+                <!-- Elite Plan -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3 class="pricing-title">Elite</h3>
+                            <div class="pricing-price">AED 200</div>
+                            <div class="pricing-period">per month</div>
+                        </div>
+                        <ul class="pricing-features">
+                            <li>Unlimited classes</li>
+                            <li>24/7 gym access</li>
+                            <li>Premium locker service</li>
+                            <li>2 free uniforms</li>
+                            <li>Monthly personal training</li>
+                            <li>4 private lessons/month</li>
+                            <li>Competition coaching</li>
+                            <li>Full spa & recovery access</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-outline-primary w-100">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specialist Courses Pricing -->
+    <section class="section-padding specialist-pricing">
+        <div class="container">
+            <h2 class="text-center mb-5">Specialist Courses</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="specialist-card">
+                        <i class="fas fa-shield-alt fa-3x text-danger mb-3"></i>
+                        <h4>Self-Defense Course</h4>
+                        <p>6-week intensive program</p>
+                        <div class="specialist-price">AED 180</div>
+                        <p class="text-muted">2 sessions per week</p>
+                        <a href="#contact" class="btn btn-primary mt-3">Enroll Now</a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="specialist-card">
+                        <i class="fas fa-child fa-3x text-danger mb-3"></i>
+                        <h4>Kids Program</h4>
+                        <p>Ages 5-13 years</p>
+                        <div class="specialist-price">AED 75</div>
+                        <p class="text-muted">per month</p>
+                        <a href="#contact" class="btn btn-primary mt-3">Enroll Now</a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="specialist-card">
+                        <i class="fas fa-dumbbell fa-3x text-danger mb-3"></i>
+                        <h4>Personal Training</h4>
+                        <p>One-on-one sessions</p>
+                        <div class="specialist-price">AED 60</div>
+                        <p class="text-muted">per hour</p>
+                        <a href="#contact" class="btn btn-primary mt-3">Book Session</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-4">
+                <div class="col-md-4 mb-4">
+                    <div class="specialist-card">
+                        <i class="fas fa-users fa-3x text-danger mb-3"></i>
+                        <h4>Corporate Group</h4>
+                        <p>Team building & fitness</p>
+                        <div class="specialist-price">AED 350</div>
+                        <p class="text-muted">per session (up to 20)</p>
+                        <a href="#contact" class="btn btn-primary mt-3">Inquire</a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="specialist-card">
+                        <i class="fas fa-spa fa-3x text-danger mb-3"></i>
+                        <h4>Recovery Package</h4>
+                        <p>Sauna, ice bath, massage</p>
+                        <div class="specialist-price">AED 40</div>
+                        <p class="text-muted">per session</p>
+                        <a href="#contact" class="btn btn-primary mt-3">Book Now</a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="specialist-card">
+                        <i class="fas fa-trophy fa-3x text-danger mb-3"></i>
+                        <h4>Competition Prep</h4>
+                        <p>Intensive fight camp</p>
+                        <div class="specialist-price">AED 500</div>
+                        <p class="text-muted">8-week program</p>
+                        <a href="#contact" class="btn btn-primary mt-3">Start Training</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact/Join Section -->
+    <section class="section-padding contact-section" id="contact">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="mb-4">Ready to Start Your Journey?</h2>
+                    <p class="lead mb-4">Contact us today to schedule your free trial class. No commitment required.</p>
+                    <div class="row mt-5">
+                        <div class="col-md-4 mb-4">
+                            <i class="fas fa-phone fa-2x text-danger mb-3"></i>
+                            <h5>Call Us</h5>
+                            <p>(+971)522247798</p>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <i class="fas fa-envelope fa-2x text-danger mb-3"></i>
+                            <h5>Email Us</h5>
+                            <p>join@martialartsacademy.co.ae</p>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <i class="fas fa-map-marker-alt fa-2x text-danger mb-3"></i>
+                            <h5>Visit Us</h5>
+                            <p>24 Al Khail Street,Dubai, UAE</p>
+                        </div>
+                    </div>
+                    <a href="contact.html" class="btn btn-primary btn-lg mt-4">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5>Martial Arts Academy</h5>
+                    <p>Empowering individuals through world-class martial arts training since 1999.</p>
+                    <div class="social-links mt-3">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="instructors.html">Instructors</a></li>
+                        <li><a href="membership.html">Membership</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5>Contact Info</h5>
+                    <ul class="list-unstyled">
+                         <li><i class="fas fa-map-marker-alt me-2"></i> 24 Al Khail Street,Dubai, UAE</li>
+                        <li><i class="fas fa-phone me-2"></i> (+971) 522247798</li>
+                        <li><i class="fas fa-envelope me-2"></i> info@martialartsacademy.co.ae</li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5>Opening Hours</h5>
+                    <ul class="list-unstyled">
+                        <li>Mon-Fri: 6:00 AM - 10:00 PM</li>
+                        <li>Saturday: 8:00 AM - 8:00 PM</li>
+                        <li>Sunday: 9:00 AM - 6:00 PM</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="mt-4 mb-4" style="border-color: rgba(255,255,255,0.1);">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <p class="mb-0">&copy; 2026 Martial Arts Academy. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
